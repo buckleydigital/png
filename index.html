@@ -6,6 +6,10 @@
   <title>Roof Restoration Melbourne | Free Quote – Painting Now</title>
   <meta name="description" content="Get a free roof restoration quote from Melbourne's trusted local experts. Fast response, no obligation." />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,700;0,900;1,900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -16,372 +20,756 @@
     fbq('init', '179443765087583');
     fbq('track', 'PageView');
   </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=179443765087583&ev=PageView&noscript=1" />
-  </noscript>
-  <!-- End Meta Pixel -->
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=179443765087583&ev=PageView&noscript=1"/></noscript>
 
   <style>
+    /* ═══════════════════════════════════════════════
+       TOKENS
+    ═══════════════════════════════════════════════ */
+    :root {
+      --bg:           #070d1a;
+      --bg2:          #0d1628;
+      --surface:      #111c2e;
+      --surface2:     #162135;
+      --border:       rgba(255,255,255,.08);
+      --border-hi:    rgba(240,110,30,.35);
+
+      --accent:       #f06e1e;
+      --accent-dk:    #c8540e;
+      --accent-lt:    #ff9a5c;
+      --accent-glow:  rgba(240,110,30,.18);
+
+      --gold:         #f5c842;
+      --gold-glow:    rgba(245,200,66,.12);
+
+      --white:        #ffffff;
+      --text:         #e8eaf0;
+      --muted:        #7a8499;
+      --muted2:       #4a5568;
+
+      --r-sm:  8px;
+      --r-md:  14px;
+      --r-lg:  20px;
+      --r-xl:  28px;
+
+      --shadow-card: 0 8px 40px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.04) inset;
+      --shadow-glow: 0 0 60px rgba(240,110,30,.2);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --orange:     #f05a1a;
-      --orange-dk:  #d44910;
-      --orange-lt:  #fff4ef;
-      --text:       #1a1a1a;
-      --muted:      #555;
-      --border:     #ddd;
-      --white:      #ffffff;
-      --radius:     12px;
-      --shadow:     0 4px 24px rgba(0,0,0,.10);
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f7f7f7;
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Header ── */
-    header {
-      background: var(--white);
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-      padding: 14px 20px;
+    /* ── Noise texture ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: .6;
+    }
+
+    /* ── Ambient glows ── */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(240,110,30,.12) 0%, transparent 70%);
+      top: -200px; left: -100px;
+    }
+    .glow-orb-2 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(245,200,66,.07) 0%, transparent 70%);
+      bottom: 100px; right: -100px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      padding: 14px 32px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: space-between;
+      background: rgba(7,13,26,.72);
+      backdrop-filter: blur(18px) saturate(1.6);
+      -webkit-backdrop-filter: blur(18px) saturate(1.6);
+      border-bottom: 1px solid var(--border);
     }
-    header img { height: 52px; width: auto; }
-
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(135deg, var(--orange) 0%, #ff8c42 100%);
-      color: var(--white);
-      text-align: center;
-      padding: 40px 20px 36px;
-    }
-    .hero h1 {
-      font-size: clamp(1.5rem, 5vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: clamp(1rem, 3vw, 1.15rem);
-      opacity: .92;
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* ── Trust bar ── */
-    .trust-bar {
-      background: var(--orange-dk);
-      color: var(--white);
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 6px 24px;
+    nav img { height: 46px; width: auto; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 10px 20px;
-      font-size: .85rem;
-      font-weight: 600;
-      text-align: center;
+      background: var(--accent);
+      color: var(--white);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      border-radius: var(--r-sm);
+      text-decoration: none;
+      transition: background .2s, transform .15s;
     }
-    .trust-bar span::before { content: '✓  '; }
+    .nav-cta:hover { background: var(--accent-dk); transform: translateY(-1px); }
 
-    /* ── Card ── */
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      padding: 32px 16px 48px;
-    }
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      width: 100%;
-      max-width: 560px;
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      padding: 160px 24px 100px;
+      text-align: center;
       overflow: hidden;
     }
 
-    /* ── Progress bar ── */
-    .progress-wrap {
-      background: #f0f0f0;
-      height: 6px;
-    }
-    .progress-bar {
-      background: var(--orange);
-      height: 6px;
-      width: 50%;
-      transition: width .4s ease;
+    /* Grid-line pattern */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(240,110,30,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240,110,30,.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+      pointer-events: none;
     }
 
-    /* ── Step ── */
-    .step { padding: 32px 28px 28px; display: none; }
+    .hero-inner { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+
+    /* Eyebrow badge */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 18px;
+      background: rgba(240,110,30,.12);
+      border: 1px solid rgba(240,110,30,.3);
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--accent-lt);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+    .hero h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+    .h1-line1 {
+      display: block;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .h1-line2 {
+      display: block;
+      font-size: clamp(1.7rem, 5.5vw, 3rem);
+      font-style: italic;
+      background: linear-gradient(90deg, var(--accent-lt) 0%, var(--gold) 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .hero-sub strong { color: var(--text); }
+
+    /* Trust pills */
+    .trust-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: border-color .2s, background .2s;
+    }
+    .pill:hover { border-color: var(--border-hi); background: var(--surface2); }
+    .pill-icon { color: var(--accent); font-size: 1rem; }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 52px;
+    }
+    .stat {
+      padding: 16px 32px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--accent-lt);
+      display: block;
+    }
+    .stat-lbl {
+      font-size: .75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       QUOTE CARD
+    ═══════════════════════════════════════════════ */
+    .quote-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .quote-label {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: var(--r-sm) var(--r-sm) 0 0;
+      margin-bottom: 0;
+    }
+    .quote-card {
+      background: var(--surface);
+      border: 1px solid var(--border-hi);
+      border-radius: 0 var(--r-lg) var(--r-lg) var(--r-lg);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+      overflow: hidden;
+    }
+
+    /* Progress */
+    .progress-wrap { background: rgba(255,255,255,.06); height: 4px; }
+    .progress-bar {
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      height: 4px;
+      width: 50%;
+      transition: width .45s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* Step */
+    .step { padding: 32px 32px 28px; display: none; }
     .step.active { display: block; }
 
     .step-label {
-      font-size: .78rem;
+      font-size: .72rem;
       font-weight: 700;
-      color: var(--orange);
+      color: var(--accent-lt);
       text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 8px;
+      letter-spacing: .1em;
+      margin-bottom: 10px;
     }
     .step h2 {
-      font-size: clamp(1.1rem, 4vw, 1.35rem);
-      font-weight: 800;
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+      font-weight: 700;
+      color: var(--white);
       line-height: 1.3;
       margin-bottom: 24px;
     }
 
-    /* ── Option buttons (step 1) ── */
-    .options { display: flex; flex-direction: column; gap: 12px; }
+    /* Option buttons */
+    .options { display: flex; flex-direction: column; gap: 10px; }
     .opt-btn {
       display: flex;
       align-items: center;
       gap: 14px;
       width: 100%;
-      padding: 16px 18px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      background: var(--white);
+      padding: 15px 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--surface2);
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
       color: var(--text);
-      transition: border-color .2s, background .2s, transform .15s;
+      transition: border-color .2s, background .2s, transform .15s, box-shadow .2s;
       text-align: left;
     }
-    .opt-btn:hover { border-color: var(--orange); background: var(--orange-lt); }
-    .opt-btn.selected { border-color: var(--orange); background: var(--orange-lt); color: var(--orange-dk); }
+    .opt-btn:hover {
+      border-color: var(--accent);
+      background: rgba(240,110,30,.1);
+      box-shadow: 0 0 20px rgba(240,110,30,.12);
+      transform: translateX(4px);
+    }
+    .opt-btn.selected {
+      border-color: var(--accent);
+      background: rgba(240,110,30,.15);
+      color: var(--accent-lt);
+      box-shadow: 0 0 24px rgba(240,110,30,.18);
+    }
     .opt-btn:active { transform: scale(.98); }
-    .opt-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .opt-icon { font-size: 1.4rem; flex-shrink: 0; }
 
-    /* ── Form fields (step 2) ── */
-    .field { margin-bottom: 16px; }
+    /* Form fields */
+    .field { margin-bottom: 14px; }
     .field label {
       display: block;
-      font-size: .85rem;
+      font-size: .78rem;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--text);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 7px;
     }
     .field input {
       width: 100%;
       padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      font-size: 1rem;
-      color: var(--text);
-      transition: border-color .2s;
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      background: rgba(255,255,255,.04);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: .95rem;
+      color: var(--white);
+      transition: border-color .2s, background .2s, box-shadow .2s;
       outline: none;
-      background: #fafafa;
     }
-    .field input:focus { border-color: var(--orange); background: var(--white); }
-    .field input.error { border-color: #e53e3e; }
-    .field .err-msg { color: #e53e3e; font-size: .78rem; margin-top: 4px; display: none; }
+    .field input::placeholder { color: var(--muted2); }
+    .field input:focus {
+      border-color: var(--accent);
+      background: rgba(240,110,30,.06);
+      box-shadow: 0 0 0 3px rgba(240,110,30,.12);
+    }
+    .field input.error { border-color: #fc5c5c; }
+    .field .err-msg { color: #fc5c5c; font-size: .75rem; margin-top: 5px; display: none; }
     .field input.error + .err-msg { display: block; }
 
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 400px) { .field-row { grid-template-columns: 1fr; } }
+    @media (max-width: 420px) { .field-row { grid-template-columns: 1fr; } }
 
-    /* ── Submit button ── */
+    /* Submit button */
     .btn-submit {
+      position: relative;
       width: 100%;
       padding: 17px;
-      background: var(--orange);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dk) 100%);
       color: var(--white);
       border: none;
-      border-radius: 10px;
+      border-radius: var(--r-md);
+      font-family: 'Exo 2', sans-serif;
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
-      letter-spacing: .02em;
-      transition: background .2s, transform .15s;
-      margin-top: 8px;
+      letter-spacing: .04em;
+      transition: transform .15s, box-shadow .2s;
+      margin-top: 10px;
+      overflow: hidden;
     }
-    .btn-submit:hover { background: var(--orange-dk); }
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.15) 0%, transparent 60%);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(240,110,30,.45);
+    }
     .btn-submit:active { transform: scale(.98); }
-    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
-    /* ── Consent ── */
-    .consent {
-      font-size: .75rem;
-      color: var(--muted);
-      margin-top: 14px;
-      line-height: 1.5;
-      text-align: center;
-    }
-
-    /* ── Back link ── */
+    /* Back link */
     .back-link {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: .85rem;
+      gap: 5px;
+      font-size: .82rem;
       color: var(--muted);
       cursor: pointer;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       background: none;
       border: none;
+      font-family: 'Nunito Sans', sans-serif;
       padding: 0;
+      transition: color .2s;
     }
     .back-link:hover { color: var(--text); }
 
-    /* ── Success ── */
-    .success-state {
-      padding: 48px 28px;
+    /* Consent */
+    .consent {
+      font-size: .72rem;
+      color: var(--muted2);
+      margin-top: 14px;
+      line-height: 1.6;
       text-align: center;
-      display: none;
     }
+
+    /* Success */
+    .success-state { padding: 48px 32px; text-align: center; display: none; }
     .success-state.active { display: block; }
     .success-icon {
-      width: 72px;
-      height: 72px;
+      width: 80px; height: 80px;
       border-radius: 50%;
-      background: var(--orange-lt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      margin: 0 auto 20px;
+      background: rgba(240,110,30,.12);
+      border: 1px solid rgba(240,110,30,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      margin: 0 auto 22px;
+      animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
     }
+    @keyframes popIn { from{transform:scale(.5);opacity:0} to{transform:scale(1);opacity:1} }
     .success-state h2 {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
       margin-bottom: 10px;
     }
-    .success-state p { color: var(--muted); line-height: 1.6; }
+    .success-state p { color: var(--muted); line-height: 1.7; }
 
-    /* ── Footer ── */
-    footer {
+    /* ═══════════════════════════════════════════════
+       TRUST SECTION (below hero)
+    ═══════════════════════════════════════════════ */
+    .trust-section {
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-tag {
       text-align: center;
-      padding: 20px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 26px;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .feature-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .6s ease, transform .6s ease, border-color .3s, box-shadow .3s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 32px rgba(240,110,30,.1);
+    }
+    .card-icon {
+      width: 50px; height: 50px;
+      border-radius: var(--r-sm);
+      background: rgba(240,110,30,.12);
+      border: 1px solid rgba(240,110,30,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+    .card-title {
+      font-family: 'Exo 2', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .card-body { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
       font-size: .78rem;
+      color: var(--muted2);
+    }
+    footer a {
       color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    footer a:hover { color: var(--accent-lt); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE NAV
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 500px) {
+      nav { padding: 12px 16px; }
+      nav img { height: 38px; }
+      .nav-cta { font-size: .8rem; padding: 9px 14px; }
+      .stat { padding: 12px 18px; }
+      .stat-num { font-size: 1.5rem; }
+      .step { padding: 24px 20px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- NAV -->
+  <nav>
     <img src="painting-now-logo.png" alt="Painting Now" />
-  </header>
+    <a href="#quote" class="nav-cta">Get Free Quote →</a>
+  </nav>
 
-  <div class="hero">
-    <h1>Get a Free Roof Restoration Quote</h1>
-    <p>Melbourne's trusted local experts. No obligation. Fast response.</p>
-  </div>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
 
-  <div class="trust-bar">
-    <span>Local Melbourne Experts</span>
-    <span>Free No-Obligation Quote</span>
-    <span>Fast Response Guaranteed</span>
-  </div>
-
-  <main>
-    <div class="card">
-      <div class="progress-wrap">
-        <div class="progress-bar" id="progressBar"></div>
+      <!-- Eyebrow -->
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        🇦🇺 Melbourne-Based · Licensed &amp; Insured · Zero Obligation
       </div>
 
-      <!-- Step 1: Timeline -->
-      <div class="step active" id="step1">
-        <div class="step-label">Step 1 of 2</div>
-        <h2>How soon are you looking to get a roof restoration?</h2>
-        <div class="options">
-          <button class="opt-btn" data-value="ASAP – Within the next week" onclick="selectOption(this)">
-            <span class="opt-icon">🔥</span>
-            <span>ASAP – Within the next week</span>
-          </button>
-          <button class="opt-btn" data-value="Within the next month" onclick="selectOption(this)">
-            <span class="opt-icon">📅</span>
-            <span>Within the next month</span>
-          </button>
-          <button class="opt-btn" data-value="1–3 months" onclick="selectOption(this)">
-            <span class="opt-icon">🗓️</span>
-            <span>1–3 months</span>
-          </button>
-          <button class="opt-btn" data-value="Just getting quotes for now" onclick="selectOption(this)">
-            <span class="opt-icon">💬</span>
-            <span>Just getting quotes for now</span>
-          </button>
+      <!-- Headline -->
+      <h1>
+        <span class="h1-line1">Stop Living With a Tired, Leaking Roof.</span>
+        <span class="h1-line2">Restore It. Protect It. Love It Again.</span>
+      </h1>
+
+      <!-- Sub-copy -->
+      <p class="hero-sub">
+        Melbourne's most trusted roof restoration specialists. We <strong>save homeowners up to 70% vs full replacement</strong> — with results that look brand new and last for years.
+      </p>
+
+      <!-- Trust pills -->
+      <div class="trust-pills">
+        <span class="pill"><span class="pill-icon">✓</span> 100% Free Quote</span>
+        <span class="pill"><span class="pill-icon">✓</span> Licensed &amp; Insured</span>
+        <span class="pill"><span class="pill-icon">✓</span> No Sales Pressure</span>
+        <span class="pill"><span class="pill-icon">★</span> 4.9★ Average Rating</span>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">2,400+</span>
+          <span class="stat-lbl">Homes Restored</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">Up to 70%</span>
+          <span class="stat-lbl">Cost Saving vs Replacement</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">10-Year</span>
+          <span class="stat-lbl">Workmanship Warranty</span>
         </div>
       </div>
 
-      <!-- Step 2: Contact details -->
-      <div class="step" id="step2">
-        <button class="back-link" onclick="goBack()">← Back</button>
-        <div class="step-label">Step 2 of 2</div>
-        <h2>Where should we send your free quote?</h2>
-
-        <form id="quoteForm" novalidate>
-          <div class="field">
-            <label for="fname">Full Name *</label>
-            <input type="text" id="fname" name="name" placeholder="e.g. Sarah Mitchell" autocomplete="name" />
-            <div class="err-msg">Please enter your name.</div>
+      <!-- QUOTE CARD -->
+      <div class="quote-wrap" id="quote">
+        <div class="quote-label">✦ Get Your Free Quote</div>
+        <div class="quote-card">
+          <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
           </div>
 
-          <div class="field">
-            <label for="femail">Email Address *</label>
-            <input type="email" id="femail" name="email" placeholder="you@example.com" autocomplete="email" />
-            <div class="err-msg">Please enter a valid email.</div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="fphone">Phone *</label>
-              <input type="tel" id="fphone" name="phone" placeholder="04XX XXX XXX" autocomplete="tel" />
-              <div class="err-msg">Please enter your phone.</div>
+          <!-- Step 1 -->
+          <div class="step active" id="step1">
+            <div class="step-label">Step 1 of 2</div>
+            <h2>How soon are you looking to get your roof restored?</h2>
+            <div class="options">
+              <button class="opt-btn" data-value="ASAP – Within the next week" onclick="selectOption(this)">
+                <span class="opt-icon">🔥</span>
+                <span>ASAP – Within the next week</span>
+              </button>
+              <button class="opt-btn" data-value="Within the next month" onclick="selectOption(this)">
+                <span class="opt-icon">📅</span>
+                <span>Within the next month</span>
+              </button>
+              <button class="opt-btn" data-value="1–3 months" onclick="selectOption(this)">
+                <span class="opt-icon">🗓️</span>
+                <span>1–3 months</span>
+              </button>
+              <button class="opt-btn" data-value="Just getting quotes for now" onclick="selectOption(this)">
+                <span class="opt-icon">💬</span>
+                <span>Just getting quotes for now</span>
+              </button>
             </div>
-            <div class="field">
-              <label for="fpostcode">Postcode *</label>
-              <input type="text" id="fpostcode" name="postcode" placeholder="e.g. 3000" maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="postal-code" />
-              <div class="err-msg">Please enter your postcode.</div>
-            </div>
           </div>
 
-          <button type="submit" class="btn-submit" id="submitBtn">
-            Get My Free Quote →
-          </button>
+          <!-- Step 2 -->
+          <div class="step" id="step2">
+            <button class="back-link" onclick="goBack()">← Back</button>
+            <div class="step-label">Step 2 of 2</div>
+            <h2>Where should we send your free quote?</h2>
 
-          <p class="consent">
-            By submitting you consent to be contacted by one of our local Melbourne partners regarding your roof restoration enquiry. We respect your privacy.
-          </p>
-        </form>
+            <form id="quoteForm" novalidate>
+              <div class="field">
+                <label for="fname">Full Name *</label>
+                <input type="text" id="fname" name="name" placeholder="e.g. Sarah Mitchell" autocomplete="name" />
+                <div class="err-msg">Please enter your name.</div>
+              </div>
+              <div class="field">
+                <label for="femail">Email Address *</label>
+                <input type="email" id="femail" name="email" placeholder="you@example.com" autocomplete="email" />
+                <div class="err-msg">Please enter a valid email.</div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="fphone">Phone *</label>
+                  <input type="tel" id="fphone" name="phone" placeholder="04XX XXX XXX" autocomplete="tel" />
+                  <div class="err-msg">Please enter your phone.</div>
+                </div>
+                <div class="field">
+                  <label for="fpostcode">Postcode *</label>
+                  <input type="text" id="fpostcode" name="postcode" placeholder="e.g. 3000" maxlength="4" inputmode="numeric" pattern="[0-9]*" autocomplete="postal-code" />
+                  <div class="err-msg">Please enter your postcode.</div>
+                </div>
+              </div>
+              <button type="submit" class="btn-submit" id="submitBtn">
+                Get My Free Quote →
+              </button>
+              <p class="consent">
+                By submitting you consent to be contacted by one of our local Melbourne partners regarding your roof restoration enquiry. We respect your privacy.
+              </p>
+            </form>
+          </div>
+
+          <!-- Success -->
+          <div class="success-state" id="successState">
+            <div class="success-icon">🎉</div>
+            <h2>You're all set!</h2>
+            <p>Thanks! One of our local Melbourne partners will be in touch with your free roof restoration quote shortly.</p>
+          </div>
+        </div><!-- /quote-card -->
+      </div><!-- /quote-wrap -->
+
+    </div><!-- /hero-inner -->
+  </section>
+
+  <!-- WHY SECTION -->
+  <section class="trust-section">
+    <p class="section-tag">Why choose us</p>
+    <h2 class="section-title">Everything a Melbourne Homeowner Needs</h2>
+    <div class="cards-grid">
+      <div class="feature-card">
+        <div class="card-icon">🔍</div>
+        <div class="card-title">Free Roof Inspection</div>
+        <p class="card-body">Our team assesses your roof's condition at no cost — we'll tell you exactly what's needed, honestly, with no upsell pressure.</p>
       </div>
-
-      <!-- Success -->
-      <div class="success-state" id="successState">
-        <div class="success-icon">🎉</div>
-        <h2>You're all set!</h2>
-        <p>Thanks! One of our local Melbourne partners will be in touch with your free roof restoration quote shortly.</p>
+      <div class="feature-card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">10-Year Workmanship Warranty</div>
+        <p class="card-body">We stand behind every job with a decade-long warranty. If something's not right, we fix it — simple as that.</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">💧</div>
+        <div class="card-title">Waterproofing & Repointing</div>
+        <p class="card-body">From ridge capping to valley flashings, we stop leaks at their source with premium-grade sealants and materials.</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Premium Roof Coatings</div>
+        <p class="card-body">Restore your roof's appearance with long-lasting paint systems designed for Melbourne's harsh UV and weather conditions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Fast, Local Response</div>
+        <p class="card-body">Melbourne-based crews ready to respond quickly. We're not a call centre — we're your local neighbours.</p>
+      </div>
+      <div class="feature-card">
+        <div class="card-icon">💰</div>
+        <div class="card-title">Save Up to 70% vs Replacement</div>
+        <p class="card-body">Restoration is the smart financial choice. Get a roof that looks and performs like new without the replacement price tag.</p>
       </div>
     </div>
-  </main>
+  </section>
 
   <footer>
-    &copy; 2025 Painting Now · Melbourne, VIC · All rights reserved
+    &copy; 2025 Painting Now · Melbourne, VIC · All rights reserved &nbsp;·&nbsp;
+    <a href="privacy-policy.html">Privacy Policy</a>
   </footer>
 
   <script>
     const WEBHOOK = 'https://hook.eu2.make.com/lohylwhx9hspajiblrmmrk8bzqyemj9l';
     let selectedTimeline = '';
 
+    /* ── Progress ── */
     function setProgress(pct) {
       document.getElementById('progressBar').style.width = pct + '%';
     }
+    setProgress(50);
 
+    /* ── Step 1 selection ── */
     function selectOption(btn) {
       document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       selectedTimeline = btn.dataset.value;
-      setTimeout(() => goToStep2(), 320);
+      setTimeout(goToStep2, 340);
     }
 
     function goToStep2() {
@@ -396,9 +784,7 @@
       setProgress(50);
     }
 
-    setProgress(50);
-
-    // Form submission
+    /* ── Submit ── */
     document.getElementById('quoteForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       if (!validate()) return;
@@ -425,30 +811,24 @@
         });
       } catch (_) { /* fire and forget */ }
 
-      // Fire Meta Pixel Lead event
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', {
-          content_name: 'Roof Restoration Quote',
-          content_category: 'Roofing'
-        });
+        fbq('track', 'Lead', { content_name: 'Roof Restoration Quote', content_category: 'Roofing' });
       }
 
-      // Show inline success
       document.getElementById('step2').classList.remove('active');
       document.getElementById('successState').classList.add('active');
-      document.getElementById('progressBar').style.background = '#22c55e';
+      document.getElementById('progressBar').style.background = 'linear-gradient(90deg, #22c55e, #86efac)';
     });
 
+    /* ── Validate ── */
     function validate() {
       let ok = true;
-
       const name = document.getElementById('fname');
       if (!name.value.trim()) { name.classList.add('error'); ok = false; }
       else name.classList.remove('error');
 
       const email = document.getElementById('femail');
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRe.test(email.value.trim())) { email.classList.add('error'); ok = false; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { email.classList.add('error'); ok = false; }
       else email.classList.remove('error');
 
       const phone = document.getElementById('fphone');
@@ -462,12 +842,23 @@
       return ok;
     }
 
-    // Clear error state on input
     ['fname','femail','fphone','fpostcode'].forEach(id => {
       document.getElementById(id).addEventListener('input', function() {
         this.classList.remove('error');
       });
     });
+
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('revealed'), i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.feature-card').forEach(card => observer.observe(card));
   </script>
 </body>
 </html>
