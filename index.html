@@ -50,6 +50,7 @@
       --radius:       14px;
       --radius-lg:    22px;
       --shadow-card:  0 24px 64px rgba(0,0,0,0.65);
+      --grad-success: linear-gradient(90deg, #22c55e, #4ade80);
     }
 
     /* === BASE === */
@@ -653,8 +654,8 @@
             <div class="stat-label">Avg Saving vs Replacement</div>
           </div>
           <div class="stat">
-            <div class="stat-num">10-Year</div>
-            <div class="stat-label">Warranty Included</div>
+            <div class="stat-num">10</div>
+            <div class="stat-label">Year Warranty Included</div>
           </div>
         </div>
       </div>
@@ -846,7 +847,7 @@
       // Show inline success
       document.getElementById('step2').classList.remove('active');
       document.getElementById('successState').classList.add('active');
-      document.getElementById('progressBar').style.background = 'linear-gradient(90deg, #22c55e, #4ade80)';
+      document.getElementById('progressBar').style.background = 'var(--grad-success)';
     });
 
     function validate() {
